@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services — Big Kev's Outdoor Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --green:    #2d5a1b;
+      --green-lt: #3d7a25;
+      --green-dk: #1a3610;
+      --gold:     #c8961a;
+      --gold-lt:  #e8b030;
+      --off:      #f8f6f2;
+      --white:    #ffffff;
+      --text:     #1c1c1c;
+      --gray:     #6b6b6b;
+      --gray-lt:  #e4e4e4;
+      --dark:     #111111;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+    a { color: var(--green); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--green-lt); }
+    .top-bar { background: var(--green-dk); color: rgba(255,255,255,0.8); font-size: 0.82rem; padding: 0.45rem 0; text-align: center; font-weight: 500; }
+    .top-bar a { color: var(--gold-lt); font-weight: 600; }
+    header { background: var(--white); border-bottom: 3px solid var(--green); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(45,90,27,0.1); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .logo { display: flex; flex-direction: column; }
+    .logo-main { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--green); letter-spacing: 0.06em; line-height: 1; }
+    .logo-main span { color: var(--gold); }
+    .logo-sub { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-top: 0.1rem; }
+    nav ul { display: flex; list-style: none; gap: 0.25rem; align-items: center; }
+    nav ul a { font-size: 0.88rem; font-weight: 600; color: var(--text); padding: 0.45rem 0.9rem; border-radius: 6px; transition: background 0.2s; }
+    nav ul a:hover, nav ul a.active { background: rgba(45,90,27,0.08); color: var(--green); }
+    .nav-cta { background: var(--green) !important; color: #fff !important; border-radius: 6px !important; padding: 0.5rem 1.2rem !important; }
+    .nav-cta:hover { background: var(--green-lt) !important; color: #fff !important; }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; flex-direction: column; gap: 5px; }
+    .menu-toggle span { display: block; width: 24px; height: 2.5px; background: var(--green); border-radius: 2px; }
+
+    /* PAGE HERO */
+    .page-hero { background: linear-gradient(135deg, var(--green-dk) 0%, var(--green) 100%); color: #fff; padding: 5rem 2rem 4rem; text-align: center; }
+    .page-hero .breadcrumb { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.55); margin-bottom: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .page-hero .breadcrumb a { color: var(--gold-lt); }
+    .page-hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); color: #fff; margin-bottom: 0.75rem; }
+    .page-hero h1 span { color: var(--gold-lt); }
+    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto; }
+
+    /* SECTION LABEL */
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-lt); margin-bottom: 0.5rem; display: block; }
+
+    /* SERVICE BLOCKS */
+    .services-section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .service-block { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 6rem; padding-bottom: 6rem; border-bottom: 2px solid var(--gray-lt); }
+    .service-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+    .service-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-lt); margin-bottom: 0.5rem; display: block; }
+    .service-content h2 { font-size: clamp(2rem, 4vw, 3rem); color: var(--green-dk); margin-bottom: 1rem; }
+    .service-content p { color: var(--gray); margin-bottom: 1rem; font-size: 0.97rem; line-height: 1.7; }
+    .service-includes { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .service-includes li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.9rem; color: var(--text); }
+    .service-includes li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+    .service-cta { margin-top: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; background: var(--green); color: #fff; font-size: 0.88rem; font-weight: 700; padding: 0.8rem 1.8rem; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.04em; transition: all 0.25s; }
+    .service-cta:hover { background: var(--green-lt); color: #fff; transform: translateY(-2px); }
+
+    /* PHOTO GRID */
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .photo-grid.three { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 160px; }
+    .photo-grid.three .photo-main { grid-column: span 2; }
+    .photo-slot { border-radius: 10px; overflow: hidden; position: relative; background: var(--off); border: 2px dashed var(--gray-lt); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; min-height: 180px; cursor: pointer; transition: border-color 0.3s, background 0.3s; }
+    .photo-slot:hover { border-color: var(--green); background: rgba(45,90,27,0.04); }
+    .photo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+    .photo-slot-icon { font-size: 2rem; opacity: 0.3; }
+    .photo-slot-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-align: center; padding: 0 1rem; }
+    .photo-overlay { position: absolute; bottom: 0.6rem; left: 0.6rem; background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.85); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px; }
+    .photo-hint { position: absolute; top: 0.5rem; right: 0.5rem; background: var(--gold); color: var(--dark); font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.4rem; border-radius: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* BOOKING STRIP */
+    .booking-strip { background: var(--green-dk); color: #fff; padding: 4rem 2rem; text-align: center; }
+    .booking-strip h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.75rem; color: #fff; }
+    .booking-strip p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 480px; margin: 0 auto 2rem; }
+    .btn-gold { background: var(--gold); color: var(--dark); font-size: 0.9rem; font-weight: 700; padding: 0.9rem 2.2rem; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.04em; transition: all 0.25s; display: inline-block; }
+    .btn-gold:hover { background: var(--gold-lt); color: var(--dark); transform: translateY(-2px); }
+
+    footer { background: var(--dark); color: rgba(255,255,255,0.55); padding: 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.55); }
+    footer a:hover { color: var(--gold-lt); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      nav { display: none; width: 100%; }
+      nav.open { display: block; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-lt); box-shadow: 0 8px 20px rgba(0,0,0,0.1); padding: 1rem; }
+      nav.open ul { flex-direction: column; }
+      nav.open ul a { display: block; padding: 0.65rem 1rem; }
+      .header-inner { position: relative; flex-wrap: wrap; }
+      .service-block, .service-block.reverse { grid-template-columns: 1fr; direction: ltr; gap: 2rem; }
+      .services-section { padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    5-Star Rated Houston Outdoor Pros · Call <a href="tel:8324721531">(832) 472-1531</a> · Free Estimates
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-main">Big <span>Kev's</span> Outdoor Solutions</span>
+        <span class="logo-sub">Houston, Texas · Est. &amp; Trusted</span>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="index.html">Home</a> / Services</p>
+    <h1>Our <span>Services</span></h1>
+    <p>Everything your outdoor space needs — done by a crew that takes pride in the work.</p>
+  </section>
+
+  <main class="services-section">
+
+    <!-- SERVICE 1: LAWN CARE -->
+    <div class="service-block reveal" id="lawn-care">
+      <div class="service-content">
+        <span class="service-num">Service 01</span>
+        <h2>Lawn Care</h2>
+        <p>Regular, reliable lawn maintenance that keeps your property looking sharp week after week. We handle the mowing, edging, and cleanup so you don't have to.</p>
+        <p>Available as a one-time service or on a weekly/biweekly schedule — we work around your timeline.</p>
+        <ul class="service-includes">
+          <li>Lawn mowing to preferred height</li>
+          <li>Edging along driveways, sidewalks &amp; beds</li>
+          <li>Trimming around obstacles and structures</li>
+          <li>Grass clipping blowdown and cleanup</li>
+          <li>Seasonal overseeding available</li>
+        </ul>
+        <a href="contact.html" class="service-cta">Get a Quote →</a>
+      </div>
+      <div class="photo-grid three">
+        <div class="photo-slot photo-main">
+          <span class="photo-hint">Add Photo</span>
+          <span class="photo-slot-icon">🌿</span>
+          <span class="photo-slot-label">Before / After Lawn Photo</span>
+          <span class="photo-overlay">Lawn Care</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">✂️</span>
+          <span class="photo-slot-label">Edging Photo</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🌱</span>
+          <span class="photo-slot-label">Cleanup Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 2: LANDSCAPING -->
+    <div class="service-block reverse reveal" id="landscaping">
+      <div class="service-content">
+        <span class="service-num">Service 02</span>
+        <h2>Landscaping</h2>
+        <p>Transform your outdoor space with professional landscaping design and installation. We handle everything from mulch beds and garden borders to full front yard redesigns.</p>
+        <p>We use quality plants and materials suited for Houston's climate — built to last, built to impress.</p>
+        <ul class="service-includes">
+          <li>Landscape design consultation</li>
+          <li>Planting beds and garden borders</li>
+          <li>Mulch installation and refresh</li>
+          <li>Sod installation and grading</li>
+          <li>Stone borders and decorative edging</li>
+          <li>Seasonal flower and plant installation</li>
+        </ul>
+        <a href="contact.html" class="service-cta">Get a Quote →</a>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-slot" style="min-height:240px">
+          <span class="photo-hint">Add Photo</span>
+          <span class="photo-slot-icon">🌳</span>
+          <span class="photo-slot-label">Landscaping Project Photo</span>
+          <span class="photo-overlay">Before</span>
+        </div>
+        <div class="photo-slot" style="min-height:240px">
+          <span class="photo-slot-icon">🌺</span>
+          <span class="photo-slot-label">Finished Landscape Photo</span>
+          <span class="photo-overlay">After</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🪨</span>
+          <span class="photo-slot-label">Mulch / Border Detail</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🌻</span>
+          <span class="photo-slot-label">Planting Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 3: PRESSURE WASHING -->
+    <div class="service-block reveal" id="pressure-washing">
+      <div class="service-content">
+        <span class="service-num">Service 03</span>
+        <h2>Pressure Washing</h2>
+        <p>Houston weather does a number on outdoor surfaces. Our pressure washing service blasts away years of grime, algae, and staining — leaving surfaces looking brand new.</p>
+        <p>Ideal before a sale, event, or just because your property deserves to look its best.</p>
+        <ul class="service-includes">
+          <li>Driveways and concrete surfaces</li>
+          <li>Sidewalks and walkways</li>
+          <li>Patios, decks, and pool areas</li>
+          <li>Fences and retaining walls</li>
+          <li>Home exterior siding</li>
+          <li>Commercial storefronts and parking lots</li>
+        </ul>
+        <a href="contact.html" class="service-cta">Get a Quote →</a>
+      </div>
+      <div class="photo-grid three">
+        <div class="photo-slot photo-main">
+          <span class="photo-hint">Add Photo</span>
+          <span class="photo-slot-icon">💧</span>
+          <span class="photo-slot-label">Driveway Before / After Photo</span>
+          <span class="photo-overlay">Pressure Washing</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🏠</span>
+          <span class="photo-slot-label">House Exterior Photo</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🚿</span>
+          <span class="photo-slot-label">Patio / Deck Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 4: SEASONAL CLEANUP -->
+    <div class="service-block reverse reveal" id="cleanup">
+      <div class="service-content">
+        <span class="service-num">Service 04</span>
+        <h2>Leaf &amp; Debris Removal</h2>
+        <p>Keep your property clean and presentable year-round. We handle seasonal leaf removal, storm debris cleanup, and ongoing yard waste removal.</p>
+        <p>Fast turnaround available for post-storm cleanups — just call and we'll get it handled.</p>
+        <ul class="service-includes">
+          <li>Fall leaf removal and disposal</li>
+          <li>Storm debris and branch cleanup</li>
+          <li>Yard waste hauling and disposal</li>
+          <li>Gutter clearing and downspout flush</li>
+          <li>One-time or scheduled service</li>
+        </ul>
+        <a href="contact.html" class="service-cta">Get a Quote →</a>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-slot" style="min-height:220px; grid-column:span 2">
+          <span class="photo-hint">Add Photo</span>
+          <span class="photo-slot-icon">🍂</span>
+          <span class="photo-slot-label">Cleanup Before / After Photo</span>
+          <span class="photo-overlay">Debris Removal</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🍃</span>
+          <span class="photo-slot-label">Leaf Removal Photo</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🌪️</span>
+          <span class="photo-slot-label">Storm Cleanup Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 5: TRIMMING -->
+    <div class="service-block reveal" id="trimming">
+      <div class="service-content">
+        <span class="service-num">Service 05</span>
+        <h2>Hedge &amp; Tree Trimming</h2>
+        <p>Overgrown hedges and trees bring down curb appeal and can create safety hazards. Our trimming service restores shape, promotes healthy growth, and keeps your property looking polished.</p>
+        <ul class="service-includes">
+          <li>Hedge and shrub shaping</li>
+          <li>Tree limb trimming and deadwood removal</li>
+          <li>Bush clearing and overgrowth control</li>
+          <li>Debris hauling and cleanup included</li>
+          <li>Commercial and residential</li>
+        </ul>
+        <a href="contact.html" class="service-cta">Get a Quote →</a>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-slot" style="min-height:220px; grid-column:span 2">
+          <span class="photo-hint">Add Photo</span>
+          <span class="photo-slot-icon">✂️</span>
+          <span class="photo-slot-label">Hedge / Tree Trimming Photo</span>
+          <span class="photo-overlay">Trimming</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🌲</span>
+          <span class="photo-slot-label">Before Trimming</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🌿</span>
+          <span class="photo-slot-label">After Trimming</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 6: OUTDOOR BUILDS -->
+    <div class="service-block reverse reveal" id="builds">
+      <div class="service-content">
+        <span class="service-num">Service 06</span>
+        <h2>Outdoor Builds</h2>
+        <p>Custom outdoor installations that add value, function, and beauty to your property. From simple mulch bed installs to retaining walls and paver paths — we build it right.</p>
+        <ul class="service-includes">
+          <li>Mulch bed installation and refresh</li>
+          <li>Retaining walls and garden borders</li>
+          <li>Paver pathways and patios</li>
+          <li>Raised garden beds</li>
+          <li>Gravel and stone installations</li>
+          <li>Custom outdoor project consultation</li>
+        </ul>
+        <a href="contact.html" class="service-cta">Get a Quote →</a>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-slot" style="min-height:220px; grid-column:span 2">
+          <span class="photo-hint">Add Photo</span>
+          <span class="photo-slot-icon">🏗️</span>
+          <span class="photo-slot-label">Outdoor Build Project Photo</span>
+          <span class="photo-overlay">Outdoor Builds</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🪨</span>
+          <span class="photo-slot-label">Retaining Wall / Pavers</span>
+        </div>
+        <div class="photo-slot">
+          <span class="photo-slot-icon">🌱</span>
+          <span class="photo-slot-label">Finished Build Photo</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <section class="booking-strip">
+    <h2>Ready to Get Started?</h2>
+    <p>Free estimates on every job. Call or submit a request and we'll get back to you within 24 hours.</p>
+    <a href="contact.html" class="btn-gold">Book a Service →</a>
+  </section>
+
+  <footer>
+    <p>Big Kev's Outdoor Solutions · Houston, Texas · <a href="tel:8324721531">(832) 472-1531</a> · &copy; 2026 All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('mainNav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => obs.observe(r));
+  </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact &amp; Book — Big Kev's Outdoor Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --green:    #2d5a1b;
+      --green-lt: #3d7a25;
+      --green-dk: #1a3610;
+      --gold:     #c8961a;
+      --gold-lt:  #e8b030;
+      --off:      #f8f6f2;
+      --white:    #ffffff;
+      --text:     #1c1c1c;
+      --gray:     #6b6b6b;
+      --gray-lt:  #e4e4e4;
+      --dark:     #111111;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+    a { color: var(--green); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--green-lt); }
+    .top-bar { background: var(--green-dk); color: rgba(255,255,255,0.8); font-size: 0.82rem; padding: 0.45rem 0; text-align: center; font-weight: 500; }
+    .top-bar a { color: var(--gold-lt); font-weight: 600; }
+    header { background: var(--white); border-bottom: 3px solid var(--green); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(45,90,27,0.1); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .logo { display: flex; flex-direction: column; }
+    .logo-main { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--green); letter-spacing: 0.06em; line-height: 1; }
+    .logo-main span { color: var(--gold); }
+    .logo-sub { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-top: 0.1rem; }
+    nav ul { display: flex; list-style: none; gap: 0.25rem; align-items: center; }
+    nav ul a { font-size: 0.88rem; font-weight: 600; color: var(--text); padding: 0.45rem 0.9rem; border-radius: 6px; transition: background 0.2s; }
+    nav ul a:hover { background: rgba(45,90,27,0.08); color: var(--green); }
+    nav ul a.active { background: rgba(45,90,27,0.08); color: var(--green); }
+    .nav-cta { background: var(--green) !important; color: #fff !important; border-radius: 6px !important; padding: 0.5rem 1.2rem !important; }
+    .nav-cta:hover { background: var(--green-lt) !important; color: #fff !important; }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; flex-direction: column; gap: 5px; }
+    .menu-toggle span { display: block; width: 24px; height: 2.5px; background: var(--green); border-radius: 2px; }
+
+    /* PAGE HERO */
+    .page-hero { background: linear-gradient(135deg, var(--green-dk) 0%, var(--green) 100%); color: #fff; padding: 5rem 2rem 4rem; text-align: center; }
+    .page-hero .breadcrumb { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.55); margin-bottom: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .page-hero .breadcrumb a { color: var(--gold-lt); }
+    .page-hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); color: #fff; margin-bottom: 0.75rem; }
+    .page-hero h1 span { color: var(--gold-lt); }
+    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto; }
+
+    /* MAIN LAYOUT */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+
+    /* INFO COLUMN */
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-lt); margin-bottom: 0.5rem; display: block; }
+    .info-col h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--green-dk); margin-bottom: 0.75rem; }
+    .info-col > p { color: var(--gray); font-size: 0.97rem; line-height: 1.7; margin-bottom: 2rem; }
+
+    .contact-card { background: var(--off); border: 1px solid var(--gray-lt); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; display: flex; gap: 1rem; align-items: flex-start; transition: box-shadow 0.3s; border-left: 3px solid var(--green); }
+    .contact-card:hover { box-shadow: 0 4px 16px rgba(45,90,27,0.1); }
+    .contact-card-icon { width: 42px; height: 42px; background: rgba(45,90,27,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem; }
+    .contact-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--green-dk); margin-bottom: 0.15rem; letter-spacing: 0.04em; }
+    .contact-card a, .contact-card p { font-size: 0.9rem; color: var(--gray); display: block; margin: 0; }
+    .contact-card a { color: var(--green); font-weight: 600; }
+    .contact-card a:hover { color: var(--green-lt); }
+
+    .service-area { background: var(--green); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; color: #fff; }
+    .service-area h4 { font-size: 0.95rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.06em; color: #fff; margin-bottom: 0.75rem; }
+    .area-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .area-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 0.2rem 0.7rem; font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+
+    /* BOOKING FORM */
+    .form-col { }
+    .form-wrap { background: var(--off); border: 1px solid var(--gray-lt); border-radius: 16px; padding: 2.5rem; border-top: 4px solid var(--green); }
+    .form-wrap h3 { font-size: 1.8rem; color: var(--green-dk); margin-bottom: 0.25rem; }
+    .form-wrap .sub { font-size: 0.88rem; color: var(--gray); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--text); letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--gray-lt);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45,90,27,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    /* SERVICE CHECKBOXES */
+    .services-check { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.25rem; }
+    .check-item { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+    .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; }
+    .check-item span { font-size: 0.85rem; color: var(--text); }
+
+    /* AVAILABILITY SLOTS */
+    .slots-label { font-size: 0.8rem; font-weight: 700; color: var(--text); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+    .slot { border: 1.5px solid var(--gray-lt); border-radius: 8px; padding: 0.6rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.78rem; font-weight: 600; color: var(--gray); }
+    .slot:hover { border-color: var(--green); color: var(--green); background: rgba(45,90,27,0.04); }
+    .slot.selected { border-color: var(--green); background: var(--green); color: #fff; }
+    .slot .slot-day { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.1rem; opacity: 0.75; }
+    .slot .slot-time { display: block; font-size: 0.78rem; }
+
+    .submit-btn { width: 100%; background: var(--green); color: #fff; border: none; border-radius: 8px; padding: 1rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.1em; cursor: pointer; transition: background 0.25s, transform 0.2s; margin-top: 0.5rem; }
+    .submit-btn:hover { background: var(--green-lt); transform: translateY(-2px); }
+    .form-note { font-size: 0.78rem; color: var(--gray); text-align: center; margin-top: 0.75rem; }
+
+    /* SUCCESS STATE */
+    .success-msg { display: none; background: rgba(45,90,27,0.08); border: 1.5px solid var(--green); border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1rem; }
+    .success-msg h3 { font-size: 1.5rem; color: var(--green-dk); margin-bottom: 0.5rem; }
+    .success-msg p { font-size: 0.9rem; color: var(--gray); }
+
+    footer { background: var(--dark); color: rgba(255,255,255,0.55); padding: 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.55); }
+    footer a:hover { color: var(--gold-lt); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      nav { display: none; width: 100%; }
+      nav.open { display: block; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-lt); box-shadow: 0 8px 20px rgba(0,0,0,0.1); padding: 1rem; }
+      nav.open ul { flex-direction: column; }
+      nav.open ul a { display: block; padding: 0.65rem 1rem; }
+      .header-inner { position: relative; flex-wrap: wrap; }
+      .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .slots-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-check { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    5-Star Rated Houston Outdoor Pros · <a href="tel:8324721531">(832) 472-1531</a> · Free Estimates
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-main">Big <span>Kev's</span> Outdoor Solutions</span>
+        <span class="logo-sub">Houston, Texas · Est. &amp; Trusted</span>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="index.html">Home</a> / Contact</p>
+    <h1>Book a <span>Service</span></h1>
+    <p>Free estimates. Fast response. Get your outdoor project started today.</p>
+  </section>
+
+  <div class="contact-layout">
+
+    <!-- INFO -->
+    <div class="info-col reveal">
+      <span class="section-label">Get In Touch</span>
+      <h2>We're Ready to Work</h2>
+      <p>Call, text, or fill out the form and we'll get back to you within 24 hours. All estimates are free — no pressure, no obligation.</p>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div>
+          <h4>Call or Text</h4>
+          <a href="tel:8324721531">(832) 472-1531</a>
+          <p>Mon–Sat · 7:00am – 7:00pm</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">⭐</div>
+        <div>
+          <h4>Google Rating</h4>
+          <p>5 Stars · Verified Reviews</p>
+          <p style="font-size:0.82rem; margin-top:0.2rem;">Houston's trusted outdoor crew</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">🕐</div>
+        <div>
+          <h4>Response Time</h4>
+          <p>Within 24 hours — often same day</p>
+          <p style="font-size:0.82rem; margin-top:0.2rem;">Urgent jobs? Call directly</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">💵</div>
+        <div>
+          <h4>Free Estimates</h4>
+          <p>No cost, no commitment</p>
+          <p style="font-size:0.82rem; margin-top:0.2rem;">We'll walk the property and quote on the spot</p>
+        </div>
+      </div>
+
+      <div class="service-area">
+        <h4>Service Areas</h4>
+        <div class="area-tags">
+          <span class="area-tag">Houston</span>
+          <span class="area-tag">Katy</span>
+          <span class="area-tag">Sugar Land</span>
+          <span class="area-tag">Pearland</span>
+          <span class="area-tag">Cypress</span>
+          <span class="area-tag">The Woodlands</span>
+          <span class="area-tag">Friendswood</span>
+          <span class="area-tag">Missouri City</span>
+          <span class="area-tag">Stafford</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKING FORM -->
+    <div class="form-col reveal" style="transition-delay:0.15s">
+      <div class="form-wrap">
+        <h3>Request a Free Quote</h3>
+        <p class="sub">Fill out the form below and we'll reach out to confirm your appointment.</p>
+
+        <form id="bookingForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" placeholder="John" required/>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" placeholder="Smith" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" placeholder="(832) 000-0000" required/>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="you@email.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Property Address *</label>
+            <input type="text" placeholder="123 Main St, Houston, TX" required/>
+          </div>
+          <div class="form-group">
+            <label>Service(s) Needed *</label>
+            <div class="services-check">
+              <label class="check-item"><input type="checkbox" value="lawn"/> <span>Lawn Care</span></label>
+              <label class="check-item"><input type="checkbox" value="landscaping"/> <span>Landscaping</span></label>
+              <label class="check-item"><input type="checkbox" value="pressure"/> <span>Pressure Washing</span></label>
+              <label class="check-item"><input type="checkbox" value="cleanup"/> <span>Debris Removal</span></label>
+              <label class="check-item"><input type="checkbox" value="trimming"/> <span>Hedge / Tree Trim</span></label>
+              <label class="check-item"><input type="checkbox" value="builds"/> <span>Outdoor Builds</span></label>
+            </div>
+          </div>
+
+          <span class="slots-label">Preferred Availability</span>
+          <div class="slots-grid" id="slotsGrid">
+            <div class="slot" onclick="selectSlot(this)"><span class="slot-day">Mon–Fri</span><span class="slot-time">Morning (7am–12pm)</span></div>
+            <div class="slot" onclick="selectSlot(this)"><span class="slot-day">Mon–Fri</span><span class="slot-time">Afternoon (12–5pm)</span></div>
+            <div class="slot" onclick="selectSlot(this)"><span class="slot-day">Saturday</span><span class="slot-time">Morning (7am–12pm)</span></div>
+            <div class="slot" onclick="selectSlot(this)"><span class="slot-day">Saturday</span><span class="slot-time">Afternoon (12–4pm)</span></div>
+            <div class="slot" onclick="selectSlot(this)"><span class="slot-day">Any Day</span><span class="slot-time">Flexible</span></div>
+            <div class="slot" onclick="selectSlot(this)"><span class="slot-day">ASAP</span><span class="slot-time">Urgent Request</span></div>
+          </div>
+
+          <div class="form-group">
+            <label>Additional Details</label>
+            <textarea placeholder="Tell us more about the job — yard size, specific issues, anything helpful..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit My Request →</button>
+          <p class="form-note">We'll call or text you within 24 hours to confirm. All estimates are free.</p>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+          <h3>Request Sent! ✓</h3>
+          <p>We'll reach out within 24 hours to confirm your appointment and provide your free estimate. Thanks for choosing Big Kev's!</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Big Kev's Outdoor Solutions · Houston, Texas · <a href="tel:8324721531">(832) 472-1531</a> · &copy; 2026 All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('mainNav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+    function selectSlot(el) {
+      document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }
+
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => obs.observe(r));
+  </script>
+</body>
+</html>
